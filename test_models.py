@@ -1,5 +1,6 @@
 import pytest
-from models import Session, Post, Comment, User
+from database import Session
+from models import Post, Comment, User
 from models import Ingredient, IngredientsAssociation
 
 
