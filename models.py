@@ -1,13 +1,7 @@
-from sqlalchemy import create_engine, Column, Table, ForeignKey
+from sqlalchemy import Column, Table, ForeignKey
 from sqlalchemy import Integer, String, Text, Boolean
-from sqlalchemy.orm import relationship, sessionmaker, scoped_session
-from sqlalchemy.ext.declarative import declarative_base
-
-engine = create_engine('sqlite:///cooking_blog.db')
-Base = declarative_base(bind=engine)
-
-session_factory = sessionmaker(bind=engine)
-Session = scoped_session(session_factory)
+from sqlalchemy.orm import relationship
+from database import Session, Base
 
 
 posts_tags_table = Table(
@@ -117,7 +111,7 @@ def create_ingredients():
         Ingredient(name='перец', measure='гр'),
         Ingredient(name='курица', measure='шт'),
         Ingredient(name='розмарин', measure='гр'),
-        Ingredient(name='сметана', measure='мл'),
+        Ingredient(name='лёд', measure='куб'),
         Ingredient(name='бекон', measure='шт'),
         Ingredient(name='водка', measure='мл'),
         Ingredient(name='томатный сок', measure='мл'),
@@ -207,9 +201,9 @@ def create_chicken_post():
     session = Session()
     user = session.query(User).filter(
         User.username == 'Child of spices').first()
-    post_text = 'Рецепт вкусной курицы с розмарином'
+    post_text = 'Рецепт вкусной курицы с овощами'
     post = Post(user_id=user.id,
-                title='Курица с розмарином',
+                title='Курица с овощами',
                 text=post_text,
                 is_published=True)
     ingredients = [

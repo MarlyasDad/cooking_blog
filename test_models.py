@@ -50,7 +50,7 @@ def test_all_posts():
 def test_chicken_post_comments():
     session = Session()
     post = session.query(Post).filter(
-        Post.title == 'Курица с розмарином').first()
+        Post.title == 'Курица с овощами').first()
     comments = post.comments
     assert len(comments) == 1
     assert isinstance(comments[0], Comment)
