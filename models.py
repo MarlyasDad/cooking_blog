@@ -27,7 +27,7 @@ class User(Base):
     __tablename__ = 'users'
 
     id = Column(Integer, primary_key=True)
-    username = Column(String(30), nullable=False)
+    username = Column(String(30), nullable=False, unique=True)
 
     posts = relationship('Post', back_populates='user')
     comments = relationship('Comment', back_populates='user')
