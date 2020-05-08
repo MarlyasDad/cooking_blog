@@ -9,6 +9,8 @@ verify_ssl = true
 sqlalchemy = "*"
 pytest = "*"
 flake8 = "*"
+flask = "*"
+flask-login = "*"
 
 [requires]
 python_version = "3.8"
