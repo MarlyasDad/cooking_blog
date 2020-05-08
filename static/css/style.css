@@ -1,0 +1,97 @@
+html, body {
+    height: 100%;
+    overflow: auto;
+}
+
+/* Небольшие устройства (планшеты, 768px и выше) */  
+@media (min-width: 768px) { 
+    main {
+        min-height: height: calc(100vh - 76px);
+        overflow: auto;
+    }
+
+    #sidebar {
+        min-height: calc(100vh - 76px);
+    }
+}
+
+/* Большие устройства (992px и выше) */  
+@media (min-width: 992px) {
+
+}
+
+#sidebar {
+    z-index: 1000;
+    /* position: fixed; */
+    /* left: 250px; */
+    width: 100%;
+    /* padding-top: 11px; */
+    /* height: 100%; */
+    margin-left: -2px;
+    overflow-y: auto;
+    background: #37474F;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+#sidebar header {
+    background-color: #263238;
+    display: inline-block;
+    font-size: 20px;
+    height: 52px;
+    width: 100%;
+    border-bottom: 1px solid #455A64;
+}
+
+#sidebar header a {
+    display: inline-block;
+    background: none;
+    color: #CFD8DC;
+    font-size: 16px;
+    padding: 15px 20px;
+}
+
+#sidebar header a:hover {
+    color: #e61767;
+}
+
+#sidebar .nav li{
+    display: inline-block;
+    width: 100%;
+}
+
+#sidebar .nav a{
+    display: inline-block;
+    background: none;
+    border-bottom: 1px solid #455A64;
+    color: #CFD8DC;
+    font-size: 16px;
+    padding: 15px 20px;
+    width: 100%;
+}
+
+#sidebar .nav a:hover{
+    background: none;
+    color: #e61767;
+}
+
+#sidebar .nav a i{
+    margin-right: 16px;
+}
+
+.post-preview {
+    min-height: 180px;
+}
+
+.img-thumbnail {
+    width: 170px;
+    height: 170px;
+}
+
+.post-preview-text {
+    overflow: hidden;
+    margin-right: 0;
+    box-sizing: border-box;
+}
