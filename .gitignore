@@ -3,5 +3,5 @@
 */__pycache__/*
 __pycache__
 build/*
-loto.egg-info/
 .coverage
+cooking_blog.db
