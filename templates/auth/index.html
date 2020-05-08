@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Информация о пользователе
+{% endblock %}
+
+{% block body %}
+<h1>Информация о {{user.username}}:</h1>
+<ul class="list-group">
+    <li class="list-group-item"><img src="/static/images/{{user.avatar}}"></li>
+    <li class="list-group-item">Онлайн: {{user.is_authenticated}}</li>
+    {% if user.is_authenticated %}
+    <li class="list-group-item">ID: {{user.id}}</li>
+    <li class="list-group-item">Email: {{user.email}}</li>
+    {% endif %}
+</ul>
+{% endblock %}

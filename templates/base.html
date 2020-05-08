@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+        Base
+        {% endblock %}
+    </title>
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.min.css">
+    <script src="/static/js/jquery-3.3.1.slim.min.js"></script>
+    <script src="/static/js/popper-1.14.3.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-2">
+            <a class="navbar-brand p-0 m-0 col-lg-3 col-md-4 col-sm-3 col-10" href="/">
+                <img src="/static/images/cat.gif" alt="Marlya's cooking blog" width="60" height="60" class="d-inline-block mr-2" alt="">
+                Marlya's cooking
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Все рецепты</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users/">Повара и поварята</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0" name="find" action="/" method="get">
+                    <div class="search-input-block col-12 col-sm-12 col-md-8 col-lg-8 p-0 pr-md-2">
+                        <input class="search-input form-control my-2 my-lg-2 mr-lg-2 mb-sm-2 w-100" type="search" name="search" placeholder="Поиск" aria-label="Поиск">
+                    </div>
+                    <div class="search-button-block col-12 col-sm-12 col-md-4 col-lg-4 p-0">
+                        <button class="search-button btn btn-outline-primary my-0 my-lg-2 w-100" type="submit">Поиск</button>
+                    </div>
+                </form>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container-fluid px-0">
+        <div class="row no-gutters">
+            <div id="sidebar" class="col-lg-3 col-md-4 col-sm-12">
+            <!-- Sidebar -->
+            <header>
+            {% if session.username %}
+                <a href="/users/current/profile/"><i class="zmdi zmdi-account-circle mr-3"></i>{{session.username}}</a>
+                <a href="/auth/logout/" class="float-right">Выход</a>
+            {%else%}
+                <a href="/auth/login/" class="mx-auto"><i class="zmdi zmdi-accounts-alt mr-3"></i>Вход/Регистрация</a>
+            {% endif %}
+            </header>
+            <ul class="nav">
+                <li>
+                    <a href="/breakfasts/">
+                        <i class="zmdi zmdi-coffee"></i>Завтраки
+                    </a>
+                </li>
+                <li>
+                    <a href="/dinners/">
+                        <i class="zmdi zmdi-local-dining"></i>Вторые блюда
+                    </a>
+                </li>
+                <li>
+                    <a href="/salads/">
+                        <i class="zmdi zmdi-pizza"></i>Закуски и Салаты
+                    </a>
+                </li>
+                <li>
+                    <a href="/cocktails/">
+                        <i class="zmdi zmdi-cocktail"></i>Коктейли
+                    </a>
+                </li>
+                <li>
+                    <a href="/drinks/">
+                        <i class="zmdi zmdi-drink"></i>Горячие напитки
+                    </a>
+                </li>
+                <li>
+                    <a href="/cakes/">
+                        <i class="zmdi zmdi-cake"></i>Десерты
+                    </a>
+                </li>
+            </ul>
+            </div>
+            <div class="col-lg-9 col-md-8 col-sm-12 p-3">
+            {% block body %}
+            {% endblock %}
+            </div>
+        </div>
+    </main>
+</body>
+</html>

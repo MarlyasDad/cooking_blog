@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Повара
+{% endblock %}
+
+<!--{% block category %}-->
+<!--<div class="row px-3">-->
+<!--    <div class="d-inline-block col-sm-12 col-md-12 col-lg-6 p-0 mb-3 mb-sm-3">-->
+<!--        <h4 class="p-0 mb-0 mt-2 align-middle">Категория: Повара и поварята</h4>-->
+<!--    </div>-->
+<!--</div>-->
+<!--{% endblock %}-->
+
+{% block body %}
+{% for user in users %}
+<div class="col-md-12 border mb-3 py-1 pl-1 post-preview shadow">
+    {% if user.avatar != None %}
+    <img src="/static/images/{{user.avatar}}" alt="{{user.username}}" class="img-thumbnail rounded shadow-sm float-left mr-3">
+    {% else %}
+    <img src="/static/images/default-min.png" alt="{{user.username}}" class="img-thumbnail rounded shadow-sm float-left mr-3">
+    {% endif %}
+    <div class="post-preview-text mt-1">
+        <h4 class="mt-0"><a href="/users/{{user.username}}/profile/">{{user.username}}</a></h4>
+        <span class="d-block mb-2"><h5 class="d-inline">Категория:</h5> {% if user.receipts|count %}Повар{% else %}Ученик повара{% endif %}</span>
+        <span class="d-block mb-2"><h5 class="d-inline">Предпочтения:</h5> {{user.preferences}}</span>
+        <span class="d-block mb-2"><h5 class="d-inline">Рецептов:</h5> {{user.receipts|count}}</span>
+        <span class="d-block mb-2"><h5 class="d-inline">Оценил блюда:</h5> {{user.comments|count}}</span>
+    </div>
+</div>
+{% endfor %}
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center mt-3 mb-0">
+        <li class="page-item disabled"><a class="page-link" href="#">Назад</a></li>
+        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+        <li class="page-item disabled"><a class="page-link" href="#">Вперёд</a></li>
+    </ul>
+</nav>
+{% endblock %}

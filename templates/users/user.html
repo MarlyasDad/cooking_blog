@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Информация о пользователе
+{% endblock %}
+
+{% block body %}
+<h1>Информация о {{user.username}}:</h1>
+<ul class="list-group">
+    <li class="list-group-item">
+        {% if user.avatar != None %}
+        <img src="/static/images/{{user.avatar}}" alt="{{user.username}}" class="img-thumbnail rounded shadow-sm float-left mr-3">
+        {% else %}
+        <img src="/static/images/default-min.png" alt="{{user.username}}" class="img-thumbnail rounded shadow-sm float-left mr-3">
+        {% endif %}
+    </li>
+    <li class="list-group-item">Предпочтения: {{user.preferences}}</li>
+    {% if session.username %}
+    <li class="list-group-item">ID: {{user.id}}</li>
+    <li class="list-group-item">Email: {{user.email}}</li>
+    {% endif %}
+</ul>
+{% endblock %}
