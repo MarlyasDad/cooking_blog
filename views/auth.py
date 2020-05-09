@@ -1,6 +1,6 @@
-from werkzeug.exceptions import BadRequest, InternalServerError
+from werkzeug.exceptions import InternalServerError
 from flask import Blueprint, request, render_template, redirect, url_for
-from flask_login import current_user, login_user, logout_user, login_required
+from flask_login import current_user, login_user, logout_user
 
 from models import Session, User
 
@@ -36,6 +36,15 @@ def get_username_and_password():
     return email, username, password
 
 
+def create_user(user: User) -> None:
+    Session.add(user)
+    try:
+        Session.commit()
+    except Exception as e:
+        Session.rollback()
+        raise InternalServerError(f"Could not create user! Error: {e}")
+
+
 @auth_app.route('/register/', methods=('GET', 'POST'), endpoint='register')
 def register():
     if current_user.is_authenticated:
@@ -46,22 +55,17 @@ def register():
 
     email, username, password = get_username_and_password()
     if not validate_data(username, password):
-        return render_template("auth/register.html",
-                               error_text="Username has to be at least 3 symbols and password minimum 8")
+        return render_template(
+            "auth/register.html",
+            error_text="Имя пользователя >= 3 символов, пароль >= 8 символов")
 
     if not validate_email_unique(email):
-        return render_template("auth/register.html", error_text="Регистрация невозможна!")
+        return render_template(
+            "auth/register.html",
+            error_text="Регистрация невозможна!")
 
     user = User(email, username, password)
-    Session.add(user)
-
-    try:
-        Session.commit()
-    except Exception as e:
-        Session.rollback()
-        # logger.exception("Error creating user!!")
-        raise InternalServerError(f"Could not create user! Error: {e}")
-
+    create_user(user)
     login_user(user)
     return redirect(url_for("auth_app.index"))
 
@@ -99,4 +103,3 @@ def logout():
 @auth_app.route('/<string:data>/profile/', methods=('GET', 'POST'))
 def user_profile(data=None):
     return redirect(url_for("auth_app.index"))
-

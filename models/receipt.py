@@ -24,7 +24,8 @@ class Receipt(Base):
                         back_populates='receipts')
     # tags = relationship('TagsAssociation', back_populates='receipt')
 
-    ingredients = relationship('IngredientsAssociation', back_populates='receipt')
+    ingredients = relationship('IngredientsAssociation',
+                               back_populates='receipt')
     category = relationship('Category', back_populates='receipts')
 
     @hybrid_property

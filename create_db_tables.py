@@ -77,15 +77,24 @@ def create_categories():
 
 
 def create_omelet_post():
-    user = Session.query(User).filter(User.username == 'Fat Larry').one_or_none()
-    category = Session.query(Category).filter(Category.name == 'Завтраки').one_or_none()
-    receipt_text = '''Нагрейте оливковое масло в маленькой сковороде на среднем огне.
-        Добавьте лук и бекон, жарьте 2-3 минуты, постоянно помешивая компоненты.
-        Взбейте два яйца, разбавьте небольшим количеством холодной воды.
-        Приправьте специями, тщательно перемешайте.
+    user = (
+        Session.query(User)
+        .filter(User.username == 'Fat Larry')
+        .one_or_none()
+    )
+    category = (
+        Session.query(Category)
+        .filter(Category.name == 'Завтраки')
+        .one_or_none()
+    )
+    receipt_text = '''Нагрейте оливковое масло в маленькой сковороде на
+        среднем огне. Добавьте лук и бекон, жарьте 2-3 минуты, постоянно
+        помешивая компоненты. Взбейте два яйца, разбавьте небольшим
+        количеством холодной воды. Приправьте специями, тщательно перемешайте.
         Постепенно выливайте яичную смесь на сковороду с луком и беконом.
-        Жарьте яичницу с беконом на протяжении 3-4 минут, подавайте с французским багетом. Декорируйте листьями
-        салата, пряными веточками душистых трав (укропом, петрушкой).
+        Жарьте яичницу с беконом на протяжении 3-4 минут, подавайте с
+        французским багетом. Декорируйте листьями салата, пряными веточками
+        душистых трав (укропом, петрушкой).
     '''
     receipt = Receipt(user_id=user.id,
                       category_id=category.id,
@@ -109,7 +118,11 @@ def create_omelet_post():
     for item in ingredients:
         ingredient = Session.query(Ingredient).filter(
             Ingredient.name == item[0]).first()
-        a = IngredientsAssociation(correction=item[1], quantity=item[2], measure=item[3])
+        a = IngredientsAssociation(
+            correction=item[1],
+            quantity=item[2],
+            measure=item[3]
+        )
         a.ingredient = ingredient
         receipt.ingredients.append(a)
     Session.flush()
@@ -127,14 +140,15 @@ def create_chicken_post():
         .filter(Category.name == 'Вторые блюда')
         .one_or_none()
     )
-    receipt_text = '''Голени посолить, поперчить и обжарить до румяной корочки. Уложить в форму, смазанную маслом.
-        Помидоры и один сладкий перец нарезать кубиками, другой перец — средними полосками, лук — полукольцами,
-        чеснок измельчить.
-        Там же, где жарилась курица, обжарить лук, затем добавить помидоры и перец кубиком, готовить на большом огне
-        5 минут. Под конец добавить чеснок и листики 1 веточки розмарина (я добавляла сушёный), посолить,
-        поперчить.
-        Выложить соус на курицу. Сверху положить полоски перца, целые помидорки черри и 2 веточки розмарина.
-        Печь около 25 минут при 200 градусах.
+    receipt_text = '''Голени посолить, поперчить и обжарить до румяной
+        корочки. Уложить в форму, смазанную маслом. Помидоры и один сладкий
+        перец нарезать кубиками, другой перец — средними полосками, лук —
+        полукольцами, чеснок измельчить. Там же, где жарилась курица,
+        обжарить лук, затем добавить помидоры и перец кубиком, готовить на
+        большом огне 5 минут. Под конец добавить чеснок и листики 1 веточки
+        розмарина (я добавляла сушёный), посолить, поперчить. Выложить соус
+        на курицу. Сверху положить полоски перца, целые помидорки черри и 2
+        веточки розмарина. Печь около 25 минут при 200 градусах.
     '''
     receipt = Receipt(user_id=user.id,
                       category_id=category.id,
@@ -155,7 +169,11 @@ def create_chicken_post():
     for item in ingredients:
         ingredient = Session.query(Ingredient).filter(
             Ingredient.name == item[0]).first()
-        a = IngredientsAssociation(correction=item[1], quantity=item[2], measure=item[3])
+        a = IngredientsAssociation(
+            correction=item[1],
+            quantity=item[2],
+            measure=item[3]
+        )
         a.ingredient = ingredient
         receipt.ingredients.append(a)
     Session.flush()
@@ -171,10 +189,10 @@ def create_cocktail_mary_post():
         .filter(Category.name == 'Коктейли')
         .one_or_none()
     )
-    receipt_text = '''Налить водку и томатный сок в охлаждённый высокий стакан.
-        Добавить лимонный сок.
-        После по вкусу насыпать перец и соль.
-        Всё тщательно перемешать и украсить веточкой сельдерея, можно долькой лимона.
+    receipt_text = '''Налить водку и томатный сок в охлаждённый высокий
+        стакан. Добавить лимонный сок. После по вкусу насыпать перец и соль.
+        Всё тщательно перемешать и украсить веточкой сельдерея, можно долькой
+        лимона.
     '''
     receipt = Receipt(user_id=user.id,
                       category_id=category.id,
@@ -192,7 +210,11 @@ def create_cocktail_mary_post():
     for item in ingredients:
         ingredient = Session.query(Ingredient).filter(
             Ingredient.name == item[0]).first()
-        a = IngredientsAssociation(correction=item[1], quantity=item[2], measure=item[3])
+        a = IngredientsAssociation(
+            correction=item[1],
+            quantity=item[2],
+            measure=item[3]
+        )
         a.ingredient = ingredient
         receipt.ingredients.append(a)
     Session.flush()
@@ -210,12 +232,12 @@ def create_banana_cocktail_post():
         .filter(Category.name == 'Коктейли')
         .one_or_none()
     )
-    receipt_text = '''Бананы очистить, нарезать кусочками, шоколад разломить на несколько частей.
-        В кастрюлю влить молоко, положить бананы и поставить на медленный огонь.
-        Постоянно помешивая, довести почти до кипения.
-        Как только шоколад расплавится, снять с огня.
-        Блендером взбить полученную смесь до появления пены.
-        Разлить по стаканам и посыпьте корицей.
+    receipt_text = '''Бананы очистить, нарезать кусочками, шоколад разломить
+        на несколько частей. В кастрюлю влить молоко, положить бананы и
+        поставить на медленный огонь. Постоянно помешивая, довести почти до
+        кипения. Как только шоколад расплавится, снять с огня. Блендером
+        взбить полученную смесь до появления пены. Разлить по стаканам и
+        посыпьте корицей.
     '''
     receipt = Receipt(user_id=user.id,
                       category_id=category.id,
@@ -235,7 +257,11 @@ def create_banana_cocktail_post():
     for item in ingredients:
         ingredient = Session.query(Ingredient).filter(
             Ingredient.name == item[0]).first()
-        a = IngredientsAssociation(correction=item[1], quantity=item[2], measure=item[3])
+        a = IngredientsAssociation(
+            correction=item[1],
+            quantity=item[2],
+            measure=item[3]
+        )
         a.ingredient = ingredient
         receipt.ingredients.append(a)
     Session.flush()
@@ -264,6 +290,3 @@ if __name__ == "__main__":
     create_banana_cocktail_post()
     create_comments_for_receipts()
     Session.remove()
-
-
-

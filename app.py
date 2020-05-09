@@ -7,8 +7,10 @@ from flask_login import LoginManager, current_user
 
 from views import auth_app, users_app, receipts_app, comments_app
 
+SECRET_KEY = "wertyuiudo3874g2o91413/f'34/f134f17g893f781foirfgdjhf"
+
 app = Flask(__name__, static_folder="static")
-app.config['SECRET_KEY'] = "wertyuiudo3874g2o91413/f'34/f134f17g893f781foirfgdjhf"
+app.config['SECRET_KEY'] = SECRET_KEY
 
 app.register_blueprint(auth_app, url_prefix='/auth')
 app.register_blueprint(users_app, url_prefix='/users')

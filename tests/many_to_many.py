@@ -2,7 +2,8 @@ import time
 from typing import Optional
 from sqlalchemy import or_
 
-from models import Session, Ingredient, IngredientsAssociation, Receipt, Category
+from models import Session, Ingredient, IngredientsAssociation
+from models import Receipt, Category
 
 last_id = 1  # for pagination
 ingredient_name: Optional[str] = 'Сыр'
@@ -25,7 +26,10 @@ if category_alias:
     )
     category = category_query.one_or_none()
     receipts_query = receipts_query.filter(Receipt.category == category)
-    association_query = association_query.join(IngredientsAssociation.receipt).filter(Receipt.category == category)
+    association_query = (
+        association_query.join(IngredientsAssociation.receipt)
+        .filter(Receipt.category == category)
+    )
 
 if ingredient_name:
     ingredient_query = Session.query(Ingredient)
@@ -39,8 +43,14 @@ if ingredient_name:
         )
     )
     ingredient = ingredient_query.one_or_none()
-    receipts_query = receipts_query.join(Receipt.ingredients).filter(IngredientsAssociation.ingredient == ingredient)
-    association_query = association_query.filter(IngredientsAssociation.ingredient == ingredient)
+    receipts_query = (
+        receipts_query.join(Receipt.ingredients)
+        .filter(IngredientsAssociation.ingredient == ingredient)
+    )
+    association_query = (
+        association_query
+        .filter(IngredientsAssociation.ingredient == ingredient)
+    )
 
 if last_id:
     receipts_query = receipts_query.filter(Receipt.id >= last_id)

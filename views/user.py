@@ -1,6 +1,5 @@
-from werkzeug.exceptions import BadRequest, InternalServerError
-from flask import Blueprint, request, render_template, redirect, url_for
-from flask_login import current_user, login_required
+from flask import Blueprint, render_template, redirect, url_for
+from flask_login import current_user
 
 from models import Session, User
 
@@ -13,12 +12,14 @@ def index():
     return render_template("users/index.html", users=users)
 
 
-@users_app.route('/current/profile/', endpoint='current', methods=('GET', 'POST'))
+@users_app.route('/current/profile/', endpoint='current',
+                 methods=('GET', 'POST'))
 def current():
     return render_template("users/user.html", user=current_user)
 
 
-@users_app.route('/<string:data>/profile/', endpoint='user_info', methods=('GET', 'POST'))
+@users_app.route('/<string:data>/profile/', endpoint='user_info',
+                 methods=('GET', 'POST'))
 def user_profile(data=None):
     user = Session.query(User).filter(User.username == data).one_or_none()
 

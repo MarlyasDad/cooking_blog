@@ -6,7 +6,8 @@ from . import Base
 tags_association_table = Table(
     'cblog_tagsassociation',
     Base.metadata,
-    Column('receipt_id', Integer, ForeignKey('cblog_receipt.id'), primary_key=True),
+    Column('receipt_id', Integer, ForeignKey('cblog_receipt.id'),
+           primary_key=True),
     Column('tag_id', Integer, ForeignKey('cblog_tag.id'), primary_key=True)
 )
 
@@ -25,7 +26,6 @@ class Tag(Base):
 
     receipts = relationship('Receipt', secondary=tags_association_table,
                             back_populates='tags')
-
     # receipts = relationship('TagsAssociation', back_populates='tag')
 
     def __repr__(self):

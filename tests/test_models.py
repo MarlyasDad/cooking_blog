@@ -13,7 +13,8 @@ def teardown_module(module):
 
 @pytest.fixture
 def omelet_ingredients():
-    return ['специи', 'яйцо', 'соль', 'перец', 'бекон', 'масло оливковое', 'сыр', 'лук']
+    return ['специи', 'яйцо', 'соль', 'перец', 'бекон', 'масло оливковое',
+            'сыр', 'лук']
 
 
 @pytest.fixture
@@ -57,7 +58,11 @@ def test_chicken_post_comments():
 
 
 def test_ingredients_count_in_post():
-    receipt = Session.query(Receipt).filter(Receipt.title.like('%Омлет%')).first()
+    receipt = (
+        Session.query(Receipt)
+        .filter(Receipt.title.like('%Омлет%'))
+        .first()
+    )
     ingredients = receipt.ingredients
     assert len(ingredients) >= 5
     assert isinstance(ingredients[0], IngredientsAssociation)
@@ -65,7 +70,10 @@ def test_ingredients_count_in_post():
 
 
 def test_ingredients_in_omelet(omelet_ingredients):
-    receipt = Session.query(Receipt).filter(Receipt.title.like('%Омлет%')).first()
+    receipt = (
+        Session.query(Receipt)
+        .filter(Receipt.title.like('%Омлет%')).first()
+    )
     ingredients_assoc = receipt.ingredients
     for ingredient_assoc in ingredients_assoc:
         assert ingredient_assoc.ingredient.name in omelet_ingredients
