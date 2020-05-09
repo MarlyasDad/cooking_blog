@@ -47,7 +47,6 @@ def index(data=None):
             )
         )
         category = category_query.one_or_none()
-        category_name = category.name
         receipts_query = receipts_query.filter(Receipt.category == category)
 
     if tag_name:

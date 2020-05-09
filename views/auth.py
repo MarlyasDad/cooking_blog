@@ -83,8 +83,6 @@ def login():
         email=email
     ).one_or_none()
 
-    print(user, username, password, email)
-
     if not user or user.password != User.hash_password(password):
         return render_template(
             "auth/login.html",
