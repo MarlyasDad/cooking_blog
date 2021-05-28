@@ -3,22 +3,46 @@
 ## Для запуска требуется:
 * Python (>=3.8)
 * sqlalchemy = "1.3.16"
-* pytest = "5.4.1"
 * flask = "1.1.2"
 * flask-login = "0.5.0"
-* flake8 = "latest"
 
-## Для запуска в виртуальном окружении используйте:
-* Pipenv
+## Запуск с помощью python3, локальный порт 5000:
+* Рекомендуется создать и активировать виртуальное окружение с помощью virtualenv или Pipenv
+  
+```bash
+$ cd "Path to main.py"
+$ pipenv --python 3.8
+$ pipenv install -r requirements.txt
+$ pipenv shell
+```
 
-## Создание SQLite:
-После клонирования репозитория и установки необходимых пакетов запустите скрипт **create_db_tables.py**.
+* Перед запуском переименуйте файл config.ini.example в config.ini и заполните своими значениями
 
-## Запуск:
 ```bash
 $ cd "Path to app.py"
 $ python3 app.py
 ```
+* Для создания тестовых данных выполните следующую команду:
+
+```bash
+$ cd "Path to test_data.py"
+$ python3 test_data.py
+```
+
+## Запуск с помощью Docker, локальный порт 5050:
+* Для того, чтобы настройки были получены из виртуального окружения установите в environment CBLOG_ENV: "True"
+* Перед запуском переименуйте файл .env.example в .env и заполните своими значениями
+
+```bash
+$ cd "Path to docker-compose.yaml"
+$ docker compose build
+$ docker compose up -d
+```
+* Для создания тестовых данных установите в environment CBLOG_TEST_DATA: "True"
+* Основан на образе python:3.9.5-buster
+
+## База данных:
+По умолчанию используется база данных SQLite но Вы можете использовать любую базу данных, которая поддерживается SQLAlchemy
 
 ## Проверка синтаксиса:
 ```bash
@@ -26,7 +50,7 @@ $ cd "Path to app.py"
 $ flake8 --max-complexity 5
 ```
 
-## Тестовые пользователи:
+## Тестовые пользователи (доступны при создании тестовых данных):
 * user@testdomain.com - Userpass  
 * larry@testdomain.com - Qwerty123  
 * pepper@testdomain.com - Qwerty456  

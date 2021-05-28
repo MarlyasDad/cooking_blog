@@ -5,3 +5,5 @@ __pycache__
 build/*
 .coverage
 cooking_blog.db
+/.env
+/config.ini

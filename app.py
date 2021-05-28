@@ -1,16 +1,16 @@
 from typing import Optional
 from flask import Flask, render_template, session, request
 from sqlalchemy import or_
-from models import Session, User, Receipt, Tag, Category
-
+from models import Session, User, Receipt, Tag, Category, Base
 from flask_login import LoginManager, current_user
-
 from views import auth_app, users_app, receipts_app, comments_app
+from config import CBLOG_FLASK_SECRET
+from test_data import create_test_data
 
-SECRET_KEY = "wertyuiudo3874g2o91413/f'34/f134f17g893f781foirfgdjhf"
+SECRET_KEY = CBLOG_FLASK_SECRET
 
 app = Flask(__name__, static_folder="static")
-app.config['SECRET_KEY'] = SECRET_KEY
+app.config['SECRET_KEY'] = CBLOG_FLASK_SECRET
 
 app.register_blueprint(auth_app, url_prefix='/auth')
 app.register_blueprint(users_app, url_prefix='/users')
@@ -94,5 +94,10 @@ def remove_session(*args):
     Session.remove()
 
 
+def main():
+    Base.metadata.create_all()
+    app.run(host="0.0.0.0", debug=False)
+
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    main()

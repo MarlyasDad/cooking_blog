@@ -1,0 +1,5 @@
+docker-compose.yaml
+Dockerfile
+postgres.env
+venv
+cooking_blog.db

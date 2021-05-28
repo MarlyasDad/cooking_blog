@@ -1,7 +1,8 @@
 from sqlalchemy import create_engine, Column, Integer
 from sqlalchemy.ext.declarative import declarative_base, declared_attr
+from config import CBLOG_SA_DB_URI
 
-engine = create_engine("sqlite:///cooking_blog.db")
+engine = create_engine(CBLOG_SA_DB_URI)
 
 
 class Base:
