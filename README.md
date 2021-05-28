@@ -38,7 +38,6 @@ $ cd "Path to docker-compose.yaml"
 $ docker compose build
 $ docker compose up -d
 ```
-* Для создания тестовых данных установите в environment CBLOG_TEST_DATA: "True"
 * Основан на образе python:3.9.5-buster
 
 ## База данных:
