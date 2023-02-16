@@ -22,4 +22,4 @@ six==1.14.0
 SQLAlchemy==1.4.15
 toml==0.10.2
 wcwidth==0.1.9
-Werkzeug==2.0.1
+Werkzeug==2.2.3
